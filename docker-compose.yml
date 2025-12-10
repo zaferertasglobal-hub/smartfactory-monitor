@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  backend-java:
+    build: ./backend-java
+    ports:
+      - "8080:8080"
+    container_name: smartfactory-java
+
+  ai-python:
+    build: ./ai-service-python
+    ports:
+      - "8001:8000"   # dışarıdan 8001, içeride 8000
+    container_name: smartfactory-ai
+
+  frontend-react:
+    build: ./frontend-react
+    ports:
+      - "3000:3000"
+    container_name: smartfactory-react
+    depends_on:
+      - backend-java
+      - ai-python
